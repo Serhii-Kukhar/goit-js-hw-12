@@ -25,10 +25,27 @@
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    overflow: ;
   }
   
   .search-button:hover {
     background-color: #3b76db;
   }
   
+  .load-button {
+    background-color: #4c8bf5;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:30px 0 30px 0;
+    display: none;
+  }
+  .load-button:hover {
+    background-color: #3b76db;
+  }
   

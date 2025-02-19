@@ -5,10 +5,12 @@ const instance = axios.create({
     baseURL: 'https://pixabay.com/api/',
 });
 const loader = document.querySelector('.loader')
+const loadbtn = document.querySelector('.js-load-button')
 
-export function searchImage(searchimage) {
+export async function searchImage(searchimage) {
     loader.style.display ='block';
-    return instance
+    try {
+        const res = await instance
         .get('', { 
             params: { 
                 key: '48800941-5fb7e609fca175f45db8152fa',
@@ -17,20 +19,20 @@ export function searchImage(searchimage) {
                 orientation: 'horizontal',
                 safesearch: 'true',
             } 
-        })
-        .then(res => {
-            if (res.data.hits.length === 0) {
+        });
+        
+        if (res.data.hits.length === 0) {
                 throw new Error('No images found');  
             }
             return res.data;
-        })
-        .catch(error => {
+    }catch(error) {
             console.error('API Error:', error);
             throw error; 
-        })
-        .finally(() => {
+        } finally {
             loader.style.display = 'none';
-        });
+            loadbtn.style.display = 'block';
+
+        }
         
 }
 

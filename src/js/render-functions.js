@@ -48,6 +48,6 @@ export function renderImages(images) {
         captionsData: 'alt',
         captionDelay: 250,
         
-      });
-      lightbox.refresh();
+    });
+    lightbox.refresh();
 }

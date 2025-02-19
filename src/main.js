@@ -4,7 +4,7 @@ import { renderImages, refs } from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-refs.formEl.addEventListener('submit', event => {
+refs.formEl.addEventListener('submit', async event => {
     event.preventDefault();
     
 
@@ -31,15 +31,13 @@ refs.formEl.addEventListener('submit', event => {
     refs.imageEl.innerHTML = '';
     event.target.elements.query.value = '';
 
-    
-    searchImage(searchQuery)
-        .then(data => {
+    try{
+        const data = await searchImage(searchQuery);
             
-            if (data && data.hits) {
-                renderImages(data.hits);
-            }
-        })
-        .catch(error => {
+        if (data && data.hits) {
+            renderImages(data.hits);
+        }
+    } catch (error) {
             
             iziToast.show({
                 title: 'Error!',
@@ -54,9 +52,12 @@ refs.formEl.addEventListener('submit', event => {
                 transitionOut: 'fadeOutRight'   
                 
             });
-        });
+        }
         
 });
+
+
+
 
 
 
