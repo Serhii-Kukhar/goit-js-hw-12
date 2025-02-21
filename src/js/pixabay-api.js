@@ -5,10 +5,9 @@ const instance = axios.create({
     baseURL: 'https://pixabay.com/api/',
 });
 const loader = document.querySelector('.loader')
-const loadbtn = document.querySelector('.js-load-button')
 
-export async function searchImage(searchimage) {
-    loader.style.display ='block';
+export async function searchImage(searchimage,page = 1,perPage = 40) {
+    
     try {
         const res = await instance
         .get('', { 
@@ -18,6 +17,8 @@ export async function searchImage(searchimage) {
                 image_type: 'photo',
                 orientation: 'horizontal',
                 safesearch: 'true',
+                page,
+                per_page: perPage
             } 
         });
         
@@ -30,7 +31,7 @@ export async function searchImage(searchimage) {
             throw error; 
         } finally {
             loader.style.display = 'none';
-            loadbtn.style.display = 'block';
+            
 
         }
         

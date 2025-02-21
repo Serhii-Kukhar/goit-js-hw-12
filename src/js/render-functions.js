@@ -5,6 +5,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 export const refs = {
     formEl: document.querySelector('.js-image-form'),
     imageEl: document.querySelector('.js-image-container'),
+    loadMoreBtn: document.querySelector('.js-load-button'),
 };
 
 export function imageTemplate(image) {
