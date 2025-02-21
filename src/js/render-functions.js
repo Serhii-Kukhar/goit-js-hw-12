@@ -52,3 +52,16 @@ export function renderImages(images) {
     });
     lightbox.refresh();
 }
+
+
+export function scrollNewImages() {
+
+    const form = document.querySelector('.gallery-item')
+    if (form) {
+        const itemHeight = form.getBoundingClientRect().height; 
+        window.scrollBy({
+            top: itemHeight * 2.2, 
+            behavior: 'smooth',
+        });
+    }
+}

@@ -1,6 +1,6 @@
 
 import { searchImage } from './js/pixabay-api';
-import { renderImages, refs } from './js/render-functions';
+import { renderImages,scrollNewImages, refs } from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -9,12 +9,18 @@ let page = 1;
 const perPage = 40;
 let totalHits = 0;
 
+
+
+
+
 refs.formEl.addEventListener('submit', async event => {
     event.preventDefault();
+
     
 
     const newQuery = event.target.elements.query.value.trim(); 
-    
+
+
 
     if (newQuery === '') {
         iziToast.show({
@@ -97,6 +103,7 @@ if (newQuery !== searchQuery){
 refs.loadMoreBtn.addEventListener('click', async () => {
     page += 1;
 
+
     try {
         const data = await searchImage(searchQuery, page, perPage);
 
@@ -122,6 +129,8 @@ refs.loadMoreBtn.addEventListener('click', async () => {
             });
         }
 
+        scrollNewImages();
+
     } catch (error) {
         iziToast.show({
             title: 'Error!',
@@ -132,6 +141,8 @@ refs.loadMoreBtn.addEventListener('click', async () => {
         });
     }
 });
+
+
 
 
 
