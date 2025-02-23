@@ -4,12 +4,56 @@ import { renderImages,scrollNewImages, refs } from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+// iziToast message
+function showMessageInfo() {
+    iziToast.show({
+        title: 'Info!',
+        message: "We're sorry, but you've reached the end of search results.",
+        color: 'blue',
+        position: 'topRight',
+        timeout: 3000,
+        maxWidth: 300,
+        progressBar: true,
+        close: true,
+        transitionIn: 'bounceInLeft',
+        transitionOut: 'fadeOutRight'   
+    });
+}
+function showMessageWarning() {
+    iziToast.show({
+        title: 'Warning!',
+        message: 'Please enter a search query.',
+        color: 'yellow',
+        position: 'topRight',
+        timeout: 3000,
+        progressBar: true,
+        close: true,
+        transitionIn: 'bounceInLeft',
+        transitionOut: 'fadeOutRight'
+    });
+}
+function showMessageError() {
+    iziToast.show({
+        title: 'Error!',
+        message: 'Sorry, there are no images matching your search query. Please try again!',
+        color: 'red',
+        position: 'topRight',
+        timeout: 3000,
+        maxWidth: 300,
+        progressBar: true,
+        close: true,
+        transitionIn: 'bounceInLeft',
+        transitionOut: 'fadeOutRight'   
+        
+    });
+}
+
+
+
 let searchQuery = '';
 let page = 1;
 const perPage = 40;
 let totalHits = 0;
-
-
 
 
 
@@ -20,20 +64,8 @@ refs.formEl.addEventListener('submit', async event => {
 
     const newQuery = event.target.elements.query.value.trim(); 
 
-
-
     if (newQuery === '') {
-        iziToast.show({
-            title: 'Warning!',
-            message: 'Please enter a search query.',
-            color: 'yellow',
-            position: 'topRight',
-            timeout: 3000,
-            progressBar: true,
-            close: true,
-            transitionIn: 'bounceInLeft',
-            transitionOut: 'fadeOutRight'
-        });
+        showMessageWarning ();
         return;
         
     }
@@ -62,39 +94,16 @@ if (newQuery !== searchQuery){
 
         if (page * perPage >= totalHits){
             refs.loadMoreBtn.style.display = 'none';
-            iziToast.show({
-                title: 'Info!',
-                message: "We're sorry, but you've reached the end of search results.",
-                color: 'blue',
-                position: 'topRight',
-                timeout: 3000,
-                maxWidth: 300,
-                progressBar: true,
-                close: true,
-                transitionIn: 'bounceInLeft',
-                transitionOut: 'fadeOutRight'   
-                
-            });
+            showMessageInfo();
 
         }
     } catch (error) {
-            
-            iziToast.show({
-                title: 'Error!',
-                message: 'Sorry, there are no images matching your search query. Please try again!',
-                color: 'red',
-                position: 'topRight',
-                timeout: 3000,
-                maxWidth: 300,
-                progressBar: true,
-                close: true,
-                transitionIn: 'bounceInLeft',
-                transitionOut: 'fadeOutRight'   
-                
-            });
-
+        showMessageError ();
         }
-        
+
+
+    event.target.reset();
+
 });
 
 
@@ -114,35 +123,15 @@ refs.loadMoreBtn.addEventListener('click', async () => {
     
         if (page * perPage >= totalHits) {
             refs.loadMoreBtn.style.display = 'none';
-            iziToast.show({
-                title: 'Info!',
-                message: "We're sorry, but you've reached the end of search results.",
-                color: 'blue',
-                position: 'topRight',
-                timeout: 3000,
-                maxWidth: 300,
-                progressBar: true,
-                close: true,
-                transitionIn: 'bounceInLeft',
-                transitionOut: 'fadeOutRight'   
-                
-            });
+            showMessageInfo ();
         }
 
         scrollNewImages();
 
     } catch (error) {
-        iziToast.show({
-            title: 'Error!',
-            message: 'Something went wrong!',
-            color: 'red',
-            position: 'topRight',
-            timeout: 3000
-        });
+        showMessageError();
     }
 });
-
-
 
 
 
