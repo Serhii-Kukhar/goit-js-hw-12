@@ -6,10 +6,9 @@ const API_KEY ='48800941-5fb7e609fca175f45db8152fa';
 const instance = axios.create({
     baseURL: 'https://pixabay.com/api/',
 });
-const loader = document.querySelector('.loader')
+
 
 export async function searchImage(searchimage,page = 1,perPage = 40) {
-    loader.style.display ='block';
     try {
         const res = await instance
         .get('', { 
@@ -31,11 +30,7 @@ export async function searchImage(searchimage,page = 1,perPage = 40) {
     }catch(error) {
             console.error('API Error:', error);
             throw error; 
-        } finally {
-            loader.style.display = 'none';
-            
-
-        }
+        } 
         
 }
 

@@ -6,6 +6,7 @@ export const refs = {
     formEl: document.querySelector('.js-image-form'),
     imageEl: document.querySelector('.js-image-container'),
     loadMoreBtn: document.querySelector('.js-load-button'),
+    loaderEl: document.querySelector('.loader'),
 };
 
 export function imageTemplate(image) {

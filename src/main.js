@@ -76,8 +76,7 @@ if (newQuery !== searchQuery){
     refs.imageEl.innerHTML = '';
     totalHits = 0;
 }
-    
-
+    refs.loaderEl.style.display = 'block';
     event.target.elements.query.value = '';
 
     try{
@@ -98,7 +97,10 @@ if (newQuery !== searchQuery){
 
         }
     } catch (error) {
+        refs.loadMoreBtn.style.display = 'none';
         showMessageError ();
+        } finally {
+            refs.loaderEl.style.display = 'none'; 
         }
 
 
@@ -111,8 +113,7 @@ if (newQuery !== searchQuery){
 
 refs.loadMoreBtn.addEventListener('click', async () => {
     page += 1;
-
-
+    refs.loaderEl.style.display = 'block';
     try {
         const data = await searchImage(searchQuery, page, perPage);
 
@@ -129,7 +130,10 @@ refs.loadMoreBtn.addEventListener('click', async () => {
         scrollNewImages();
 
     } catch (error) {
+        refs.loadMoreBtn.style.display = 'none';
         showMessageError();
+    } finally {
+        refs.loaderEl.style.display = 'none';
     }
 });
 
